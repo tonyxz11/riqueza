@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#102544">
+<title>RIBEIRO — Controle Financeiro Pessoal</title>
+<style>
+:root{--navy:#102544;--navy2:#18385f;--bg:#f3f6fa;--card:#fff;--ink:#172b49;--muted:#718096;--line:#e1e7ef;--blue:#3478d4;--yellow:#e6ad2f;--green:#23966b;--orange:#e8893c;--red:#d84c4c;--radius:18px;--shadow:0 5px 18px rgba(22,45,76,.055)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.45;padding-bottom:calc(96px + env(safe-area-inset-bottom))}button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #8ab8f2;outline-offset:2px}.app{width:min(100%,760px);margin:0 auto;padding:22px 17px 20px}.topline{font-size:10px;letter-spacing:1.7px;color:#7b8aa0;font-weight:800;margin-bottom:3px}.header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:20px}.brand h1{font-size:29px;letter-spacing:-.8px;margin:0;font-weight:800;color:var(--navy)}.header-actions{display:flex;align-items:center;gap:10px}.settings-btn{border:1px solid var(--line);background:#fff;border-radius:12px;width:42px;height:42px;padding:0;color:var(--navy);display:grid;place-items:center;flex:0 0 42px}.settings-btn svg{width:20px;height:20px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}.avatar{width:42px;height:42px;flex:0 0 42px;border-radius:50%;border:2px solid white;box-shadow:0 0 0 1px var(--line);object-fit:cover;background:#dfe8f3;display:grid;place-items:center;color:var(--navy);font-weight:800;font-size:15px;overflow:hidden}.avatar img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;border-radius:50%;border:0;margin:0;padding:0}.balance{position:relative;overflow:hidden;background:linear-gradient(125deg,#102544 0%,#17375e 72%,#20436b 100%);border-radius:23px;padding:22px 20px 18px;color:#fff;box-shadow:0 12px 25px rgba(16,37,68,.15);margin-bottom:28px}.balance:before,.balance:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.075);border-radius:50%;pointer-events:none}.balance:before{width:210px;height:210px;right:-76px;top:-115px}.balance:after{width:150px;height:150px;right:-45px;top:-84px}.balance-head{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:8px}.eyebrow{font-size:10px;letter-spacing:1.1px;font-weight:800;color:#d1ddec}.hide-btn{border:1px solid rgba(255,255,255,.23);border-radius:9px;padding:7px 9px;background:rgba(255,255,255,.08);color:#fff;font-size:11px;white-space:nowrap}.balance-amount{position:relative;z-index:1;font-size:clamp(29px,8vw,39px);font-weight:800;letter-spacing:-1.1px;margin:10px 0 20px}.balance-actions{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:10px}.primary-action,.secondary-action{min-height:43px;border-radius:12px;border:1px solid rgba(255,255,255,.25);padding:10px 9px;font-weight:750;font-size:12px}.primary-action{background:#fff;color:var(--navy)}.secondary-action{background:rgba(255,255,255,.09);color:#fff}.section-heading{margin:0 0 14px}.section-heading h2{margin:0;font-size:21px;letter-spacing:-.45px;color:var(--navy)}.section-heading p{margin:3px 0 0;color:var(--muted);font-size:13px}.summary-list{display:grid;gap:10px;margin-bottom:27px}.summary-card{display:flex;align-items:center;justify-content:space-between;gap:13px;background:#fff;border:1px solid var(--line);border-radius:17px;padding:15px 14px;min-height:86px;width:100%;text-align:left;color:inherit;box-shadow:0 2px 7px rgba(30,54,82,.015)}.summary-icon{width:43px;height:43px;flex:0 0 43px;border-radius:13px;display:grid;place-items:center;font-size:20px;background:#fff7e3;color:var(--yellow)}.summary-card:nth-child(2) .summary-icon{background:#e8f7ef;color:var(--green)}.summary-card:nth-child(3) .summary-icon{background:#fff0e4;color:var(--orange)}.summary-copy{min-width:0;flex:1}.summary-copy strong{display:block;font-size:14px;color:var(--navy);margin-bottom:0}.summary-copy span{display:block;font-size:11px;color:var(--muted)}.summary-total{text-align:right;white-space:nowrap}.summary-total strong{font-size:13px;color:var(--navy);display:block}.summary-total small{display:none;font-size:10px;color:var(--muted)}.view{display:none}.view.active{display:block;animation:fade .18s ease}@keyframes fade{from{opacity:.5;transform:translateY(3px)}to{opacity:1;transform:none}}.page-title{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:5px 0 17px}.page-title h2{margin:0;font-size:23px;color:var(--navy);letter-spacing:-.5px}.page-title p{margin:4px 0 0;color:var(--muted);font-size:12px}.btn{border:0;background:var(--navy);color:#fff;border-radius:11px;padding:11px 14px;font-weight:750;font-size:12px}.btn.light{background:#edf2f8;color:var(--navy)}.btn.danger{background:#fff0f0;color:var(--red)}.btn.small{padding:8px 10px;font-size:11px}.panel{background:#fff;border:1px solid var(--line);border-radius:17px;padding:16px;margin-bottom:13px;box-shadow:var(--shadow)}.panel h3{margin:0 0 12px;font-size:15px;color:var(--navy)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{min-width:0;display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:11px;font-weight:750;color:#53647a}.field input,.field select,.field textarea,.search{width:100%;min-width:0;border:1px solid #dce4ee;border-radius:10px;background:#fff;padding:11px 10px;color:var(--ink);outline:none}.field textarea{min-height:76px;resize:vertical}.field input[type=date]{padding:10px 7px;min-height:41px;font-size:12px}.form-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:14px;flex-wrap:wrap}.toolbar{display:flex;gap:8px;margin-bottom:12px}.toolbar .search{flex:1;min-width:0}.toolbar select{border:1px solid var(--line);border-radius:10px;background:white;color:var(--ink);padding:9px;max-width:48%}.record-list{display:grid;gap:10px}.record{background:#fff;border:1px solid var(--line);border-radius:15px;padding:14px;box-shadow:var(--shadow)}.record-top{display:flex;justify-content:space-between;gap:12px}.record-title{font-weight:800;color:var(--navy);font-size:14px;overflow-wrap:anywhere}.record-sub{font-size:11px;color:var(--muted);margin-top:3px;overflow-wrap:anywhere}.record-amount{text-align:right;font-weight:800;color:var(--navy);white-space:nowrap}.record-amount small{display:block;color:var(--muted);font-weight:500;font-size:10px}.record-meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.pill{display:inline-flex;align-items:center;padding:4px 8px;border-radius:99px;background:#eef3f8;color:#52647b;font-size:10px;font-weight:700}.pill.pending{background:#fff5dc;color:#936b0c}.pill.paid{background:#e6f7ee;color:#18794e}.pill.overdue{background:#ffeded;color:#bd3b3b}.record-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;padding-top:10px;border-top:1px solid #edf0f5}.empty{background:#fff;border:1px dashed #cfd9e6;border-radius:15px;padding:25px 15px;text-align:center;color:var(--muted);font-size:12px}.empty b{display:block;color:var(--navy);font-size:14px;margin-bottom:4px}.stat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:14px}.stat{padding:14px;background:#fff;border:1px solid var(--line);border-radius:14px}.stat span{display:block;color:var(--muted);font-size:11px}.stat strong{display:block;color:var(--navy);font-size:17px;margin-top:4px;overflow-wrap:anywhere}.progress{height:8px;background:#eaf0f6;border-radius:99px;overflow:hidden;margin:10px 0 5px}.progress span{display:block;height:100%;background:var(--green);border-radius:99px;width:0}.progress-label{display:flex;justify-content:space-between;color:var(--muted);font-size:10px}.history-item{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid #edf0f5}.history-item:last-child{border-bottom:0}.history-item strong{display:block;font-size:12px;color:var(--navy)}.history-item small{color:var(--muted);font-size:10px}.positive{color:var(--green)!important}.negative{color:var(--red)!important}.bottom-nav{position:fixed;z-index:20;bottom:0;left:0;right:0;padding:9px 12px calc(9px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid #e5eaf1;backdrop-filter:blur(16px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;max-width:760px;margin:0 auto}.nav-item{border:0;background:transparent;color:#65758a;border-radius:12px;min-width:0;min-height:54px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10px;font-weight:700;padding:5px 2px}.nav-item .nav-icon{font-size:18px;line-height:1.1}.nav-item[data-view="debts"] .nav-icon{color:var(--yellow)}.nav-item[data-view="loans"] .nav-icon{color:var(--green)}.nav-item[data-view="sales"] .nav-icon{color:var(--orange)}.nav-item.active{background:var(--navy);color:#fff}.nav-item.active .nav-icon{color:#fff}.modal-backdrop{position:fixed;inset:0;z-index:40;background:rgba(11,26,46,.48);display:none;align-items:flex-end;justify-content:center;padding:12px}.modal-backdrop.open{display:flex}.modal{background:var(--bg);border-radius:22px 22px 16px 16px;width:min(100%,600px);max-height:92dvh;overflow:auto;padding:18px 16px calc(18px + env(safe-area-inset-bottom));box-shadow:0 20px 60px #0c203744}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px}.modal-head h2{margin:0;font-size:19px;color:var(--navy)}.close{border:0;border-radius:10px;background:#e8edf4;color:var(--navy);width:34px;height:34px;font-size:19px}.toast{position:fixed;z-index:60;left:50%;bottom:calc(83px + env(safe-area-inset-bottom));transform:translate(-50%,15px);background:#132d4f;color:white;padding:11px 16px;border-radius:12px;box-shadow:0 8px 24px #10254430;font-size:12px;font-weight:650;opacity:0;pointer-events:none;transition:.2s;max-width:calc(100% - 30px);text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}.hidden{display:none!important}.divider{height:1px;background:var(--line);margin:14px 0}.muted{color:var(--muted)}.note{font-size:11px;color:var(--muted);line-height:1.5}.danger-zone{border-color:#f0d6d6}.file-label{display:inline-flex;align-items:center;justify-content:center;cursor:pointer}.crop-stage{width:min(76vw,280px);height:min(76vw,280px);border-radius:50%;overflow:hidden;background:#dfe7f1;margin:8px auto 18px;touch-action:none;position:relative;border:4px solid #fff;box-shadow:0 0 0 1px var(--line)}.crop-stage img{position:absolute;max-width:none;user-select:none;-webkit-user-drag:none;pointer-events:none}.crop-control{margin:12px 0}.crop-control label{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--navy);margin-bottom:7px}.crop-control input{width:100%;accent-color:var(--navy)}
+@media(min-width:600px){.app{padding:30px 25px 25px}.summary-list{grid-template-columns:1fr}.modal-backdrop{align-items:center}.modal{border-radius:22px}.form-grid{gap:14px}.balance{padding:25px 25px 21px}}
+@media(max-width:370px){.app{padding-left:12px;padding-right:12px}.brand h1{font-size:26px}.settings-btn{padding:9px 8px;font-size:11px}.header-actions{gap:7px}.avatar{width:38px;height:38px;flex-basis:38px}.balance{padding:18px 15px}.summary-card{padding:12px 10px;gap:9px}.summary-icon{width:38px;height:38px;flex-basis:38px}.summary-copy strong{font-size:13px}.summary-copy span{font-size:10px}.summary-total strong{font-size:12px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.page-title h2{font-size:21px}}
+
+/* Refinamento visual: mais consistente, elegante e confortável no celular */
+.settings-btn{width:44px;height:44px;flex-basis:44px;border-radius:14px;border:1px solid #dbe4ef;background:linear-gradient(180deg,#fff,#f7f9fc);box-shadow:0 3px 10px rgba(16,37,68,.07);transition:transform .16s ease,box-shadow .16s ease}.settings-btn svg{width:23px;height:23px;stroke-width:1.75}.settings-btn:active,.avatar:active,.btn:active,.summary-card:active{transform:scale(.98)}
+.brand h1{letter-spacing:-1px}.topline{letter-spacing:1.45px}.balance{box-shadow:0 14px 32px rgba(16,37,68,.16)}.summary-card,.panel,.record,.stat{box-shadow:0 4px 15px rgba(22,45,76,.035);transition:border-color .16s ease,box-shadow .16s ease}.summary-card:hover,.record:hover{border-color:#cbd8e8;box-shadow:0 7px 20px rgba(22,45,76,.06)}.summary-icon{font-weight:750}.btn{box-shadow:0 3px 8px rgba(16,37,68,.09);transition:filter .16s ease,transform .16s ease}.btn:hover{filter:brightness(1.08)}.field input:focus,.field select:focus,.field textarea:focus,.search:focus{border-color:#8aadd9;box-shadow:0 0 0 3px rgba(52,120,212,.10)}.bottom-nav{box-shadow:0 -5px 24px rgba(18,39,68,.055)}.nav-item{transition:background .16s ease,color .16s ease}.modal{background:#fff;border:1px solid rgba(255,255,255,.7)}.modal-backdrop{backdrop-filter:blur(5px)}
+.crop-help{font-size:12px;color:var(--muted);line-height:1.55;margin:0 0 12px}.crop-stage{width:min(78vw,300px);height:min(78vw,300px);border-radius:50%;overflow:hidden;background:#dfe7f1;margin:8px auto 20px;touch-action:none;position:relative;border:4px solid #fff;box-shadow:0 0 0 1px #d7e0ec,0 12px 30px rgba(16,37,68,.13);cursor:grab;user-select:none;-webkit-user-select:none}.crop-stage.dragging{cursor:grabbing}.crop-stage img{position:absolute;max-width:none;user-select:none;-webkit-user-drag:none;pointer-events:none;max-width:none}.crop-hint{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:8px;font-weight:800;letter-spacing:1px;white-space:nowrap;color:white;background:rgba(16,37,68,.58);padding:5px 8px;border-radius:99px;pointer-events:none}.crop-control{margin:12px 0 20px}.crop-control label{display:flex;justify-content:space-between;font-size:12px;font-weight:750;color:var(--navy);margin-bottom:9px}.crop-control input{width:100%;accent-color:var(--navy);height:24px}.crop-actions{display:flex;gap:9px;justify-content:flex-end;margin-top:16px}.crop-actions .btn{min-width:118px;min-height:43px}
+@media(max-width:370px){.settings-btn{width:40px;height:40px;flex-basis:40px;padding:0}.settings-btn svg{width:22px;height:22px}.crop-actions .btn{min-width:0;flex:1}}
+
+/* Refinamento visual inspirado na referência enviada */
+:root{--navy:#192e59;--navy2:#284779;--bg:#f2f5fa;--ink:#1b263d;--muted:#707d96;--line:#dce4f0;--radius:24px;--shadow:0 12px 32px rgba(25,46,89,.055)}
+body{font-size:16px;padding-bottom:calc(112px + env(safe-area-inset-bottom));background:#f2f5fa}
+.app{width:min(100%,800px);padding:32px 22px 28px}
+.header{align-items:center;margin-bottom:32px;gap:14px}.topline{font-size:13px;letter-spacing:2px;color:#69758d;margin-bottom:10px}.brand h1{font-size:clamp(29px,6vw,42px);letter-spacing:-1.4px;line-height:1.08;color:#1b263d}.header-actions{gap:12px}.settings-btn{width:48px;height:48px;flex-basis:48px;border-radius:16px;background:#f5f7fb;border:1px solid #d8e1ee;box-shadow:none}.settings-btn svg{width:25px;height:25px;stroke-width:1.9}.avatar{width:54px;height:54px;flex-basis:54px;border:3px solid white;box-shadow:0 2px 10px #192e591a}
+.balance{border-radius:40px;padding:38px 38px 34px;margin-bottom:48px;min-height:300px;background:linear-gradient(115deg,#192e59 0%,#263f70 70%,#3b5b8e 100%);box-shadow:0 22px 45px rgba(25,46,89,.13)}.balance:before{width:390px;height:390px;right:-58px;top:-235px;border-color:rgba(255,255,255,.065);box-shadow:0 0 0 42px rgba(255,255,255,.025)}.balance:after{width:290px;height:290px;right:-80px;top:-175px;border-color:rgba(255,255,255,.055)}.balance-head{gap:12px}.eyebrow{font-size:clamp(11px,2.8vw,17px);letter-spacing:2px}.hide-btn{font-size:14px;padding:13px 18px;border-radius:17px;border-color:#64789e;background:rgba(255,255,255,.08)}.balance-amount{font-size:clamp(42px,9vw,68px);letter-spacing:-2px;margin:42px 0 42px}.balance-actions{display:flex;gap:12px}.primary-action,.secondary-action{font-size:clamp(13px,3.3vw,18px);min-height:62px;border-radius:20px;padding:13px 20px}.primary-action{border:0}.secondary-action{border:0;background:rgba(255,255,255,.12)}
+.section-heading{margin-bottom:24px}.section-heading h2{font-size:clamp(24px,5vw,36px);letter-spacing:-.8px}.section-heading p{font-size:clamp(14px,3.3vw,19px);margin-top:8px}.summary-list{gap:20px;margin-bottom:42px}.summary-card{min-height:112px;border-radius:30px;padding:24px 30px;gap:14px;border:2px solid #dce4f0;box-shadow:0 8px 20px rgba(25,46,89,.025)}.summary-icon{display:none}.summary-copy strong{font-size:clamp(17px,3.7vw,25px);letter-spacing:-.3px;margin-bottom:6px}.summary-copy span{font-size:clamp(13px,3.1vw,19px)}.summary-total strong{font-size:clamp(17px,4vw,27px)}.summary-total small{display:none}
+.stat-grid{gap:14px}.stat{border-radius:20px;padding:19px}.stat span{font-size:13px}.stat strong{font-size:21px}.bottom-nav{max-width:800px;padding:12px 10px calc(12px + env(safe-area-inset-bottom));gap:8px;border-top:1px solid #dce4ef;box-shadow:none}.nav-item{min-height:82px;border-radius:20px;font-size:14px;gap:5px}.nav-item .nav-icon{font-size:0;display:grid;place-items:center;line-height:1}.nav-item .nav-icon svg{width:29px;height:29px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.nav-item[data-view="debts"] .nav-icon{color:#d4a944}.nav-item[data-view="loans"] .nav-icon{color:#5ba883}.nav-item[data-view="sales"] .nav-icon{color:#d98c5e}.nav-item.active .nav-icon{color:#6296e0}.nav-item.active{background:#192e59}
+.page-title h2{font-size:28px}.panel,.record{border-radius:22px;padding:20px}.btn{border-radius:14px;padding:12px 16px;font-size:14px}.field label{font-size:13px}.field input,.field select,.field textarea,.search{border-radius:13px;padding:13px 12px;font-size:15px}
+@media(max-width:480px){.app{padding:30px 18px 24px}.header{margin-bottom:40px}.brand h1{font-size:clamp(28px,7vw,38px)}.settings-btn{width:44px;height:44px;flex-basis:44px}.settings-btn svg{width:23px;height:23px}.avatar{width:52px;height:52px;flex-basis:52px}.balance{padding:30px 24px 27px;min-height:0;border-radius:38px;margin-bottom:48px}.balance-head{align-items:center}.eyebrow{max-width:58%;line-height:1.5}.hide-btn{font-size:12px;padding:11px 13px}.balance-amount{font-size:clamp(42px,11vw,58px);margin:42px 0 42px}.balance-actions{gap:10px}.primary-action,.secondary-action{min-height:58px;padding:11px 12px;border-radius:20px;font-size:14px}.summary-card{min-height:106px;border-radius:30px;padding:21px 22px}.summary-copy strong{font-size:17px}.summary-copy span{font-size:13px}.summary-total strong{font-size:17px}.bottom-nav{padding-left:10px;padding-right:10px}.nav-item{min-height:82px;font-size:12px}}
+@media(max-width:370px){.app{padding-left:13px;padding-right:13px}.header-actions{gap:7px}.balance{padding:25px 18px}.balance-actions{gap:7px}.primary-action,.secondary-action{font-size:12px;padding:10px 8px}.summary-card{padding:18px 15px}.summary-copy strong{font-size:15px}.summary-copy span{font-size:12px}.summary-total strong{font-size:15px}.nav-item{font-size:11px}}
+
+
+/* Ajuste de escala: proporções mais naturais no celular */
+.settings-btn{font-size:21px;line-height:1;width:40px;height:40px;flex:0 0 40px;border-radius:12px;display:grid;place-items:center;padding:0}
+.settings-btn svg{display:block}
+.app{width:min(100%,760px);padding:22px 17px 18px}
+.header{margin-bottom:22px;gap:10px}
+.topline{font-size:11px;letter-spacing:1.5px;margin-bottom:5px}
+.brand h1{font-size:clamp(27px,6vw,32px);letter-spacing:-1px}
+.header-actions{gap:8px}.avatar{width:42px;height:42px;flex-basis:42px}
+.balance{padding:23px 20px 20px;border-radius:25px;min-height:0;margin-bottom:30px}
+.balance:before{width:245px;height:245px;right:-80px;top:-145px;box-shadow:0 0 0 24px rgba(255,255,255,.02)}
+.balance:after{width:175px;height:175px;right:-50px;top:-100px}
+.eyebrow{font-size:11px;letter-spacing:1.1px;max-width:none}
+.hide-btn{font-size:11px;padding:8px 10px;border-radius:10px}
+.balance-amount{font-size:clamp(34px,8vw,44px);letter-spacing:-1.2px;margin:22px 0 24px}
+.balance-actions{display:grid;grid-template-columns:max-content max-content;gap:9px}
+.primary-action,.secondary-action{font-size:13px;min-height:44px;border-radius:13px;padding:10px 14px}
+.section-heading{margin-bottom:16px}.section-heading h2{font-size:23px;letter-spacing:-.5px}.section-heading p{font-size:13px;margin-top:4px}
+.summary-list{gap:12px;margin-bottom:28px}
+.summary-card{min-height:82px;border-radius:18px;padding:15px 15px;gap:12px;border-width:1px;box-shadow:0 3px 12px rgba(25,46,89,.025)}
+.summary-icon{display:grid;width:38px;height:38px;flex:0 0 38px;font-size:18px;border-radius:11px}
+.summary-copy strong{font-size:14px;letter-spacing:0;margin-bottom:2px}.summary-copy span{font-size:11px}
+.summary-total strong{font-size:14px}.summary-total small{display:block}
+.bottom-nav{max-width:760px;padding:7px 10px calc(7px + env(safe-area-inset-bottom));gap:4px;box-shadow:0 -4px 18px rgba(18,39,68,.045)}
+.nav-item{min-height:58px;border-radius:12px;font-size:10px;gap:3px;padding:5px 2px}
+.nav-item .nav-icon{font-size:18px;display:grid;place-items:center;line-height:1}
+.nav-item .nav-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav-item.active .nav-icon{color:#fff}
+.page-title h2{font-size:23px}.panel,.record{border-radius:17px;padding:16px}.btn{border-radius:11px;padding:10px 13px;font-size:12px}
+.field label{font-size:11px}.field input,.field select,.field textarea,.search{border-radius:10px;padding:11px 10px;font-size:14px}
+@media(max-width:480px){.app{padding:22px 17px 18px}.header{margin-bottom:22px}.brand h1{font-size:clamp(27px,6vw,32px)}.settings-btn{width:40px;height:40px;flex-basis:40px;font-size:21px}.avatar{width:42px;height:42px;flex-basis:42px}.balance{padding:23px 20px 20px;min-height:0;border-radius:25px;margin-bottom:30px}.balance-amount{font-size:clamp(34px,8vw,44px);margin:22px 0 24px}.primary-action,.secondary-action{min-height:44px;padding:10px 12px;border-radius:13px;font-size:12px}.summary-card{min-height:82px;border-radius:18px;padding:15px}.bottom-nav{padding-left:10px;padding-right:10px}.nav-item{min-height:58px;font-size:10px}}
+@media(max-width:370px){.app{padding-left:13px;padding-right:13px}.balance{padding:20px 15px}.balance-actions{grid-template-columns:1fr 1fr}.primary-action,.secondary-action{font-size:11px;padding:9px 7px}.summary-card{padding:12px 10px;gap:9px}.summary-icon{display:none;width:34px;height:34px;flex-basis:34px}.summary-copy strong{font-size:13px}.summary-copy span{font-size:10px}.summary-total strong{font-size:12px}}
+
+
+/* Correção de proporções dos controles do cabeçalho e da foto */
+#openSettings.settings-btn{width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;max-width:40px!important;max-height:40px!important;flex:0 0 40px!important;padding:0!important;border-radius:12px!important;font-size:21px!important;line-height:1!important;display:grid!important;place-items:center!important;overflow:hidden!important}
+#avatarButton.avatar{width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;max-width:42px!important;max-height:42px!important;flex:0 0 42px!important;padding:0!important;border:2px solid #fff!important;border-radius:50%!important;overflow:hidden!important;display:grid!important;place-items:center!important;line-height:1!important}
+#avatarButton img{width:100%!important;height:100%!important;min-width:0!important;min-height:0!important;max-width:none!important;max-height:none!important;object-fit:cover!important;object-position:center!important;border:0!important;border-radius:50%!important;margin:0!important;padding:0!important;display:block!important}
+.header-actions{flex-shrink:0!important}
+@media(max-width:480px){#openSettings.settings-btn{width:40px!important;height:40px!important;flex-basis:40px!important}#avatarButton.avatar{width:42px!important;height:42px!important;flex-basis:42px!important}}
+
+/* Navegação inferior: compacta, alinhada e confortável no iPhone */
+.bottom-nav{
+  width:100%; max-width:760px; left:50%; right:auto; transform:translateX(-50%);
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:5px;
+  padding:7px 9px calc(7px + env(safe-area-inset-bottom));
+  background:rgba(255,255,255,.97); border-top:1px solid #dce4ef;
+  box-shadow:0 -5px 18px rgba(25,46,89,.06); align-items:stretch;
+}
+.bottom-nav .nav-item{
+  min-width:0; min-height:56px; padding:6px 2px; margin:0;
+  border:0; border-radius:12px; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:4px;
+  font-size:10px; line-height:1.15; font-weight:650; white-space:normal;
+}
+.bottom-nav .nav-item .nav-icon{width:22px;height:22px;display:grid;place-items:center;font-size:18px;line-height:1;flex:0 0 22px}
+.bottom-nav .nav-item .nav-icon svg{display:block;width:20px;height:20px;max-width:100%;max-height:100%;}
+.bottom-nav .nav-item>span:last-child{display:block;max-width:100%;overflow-wrap:anywhere;text-align:center}
+.bottom-nav .nav-item.active{background:var(--navy);color:#fff}
+.bottom-nav .nav-item.active .nav-icon{color:#fff}
+@media(max-width:370px){
+ .bottom-nav{gap:2px;padding-left:5px;padding-right:5px}
+ .bottom-nav .nav-item{font-size:9px;min-height:53px;gap:3px;border-radius:10px;padding:5px 1px}
+ .bottom-nav .nav-item .nav-icon{width:20px;height:20px;flex-basis:20px}
+ .bottom-nav .nav-item .nav-icon svg{width:18px;height:18px}
+}
+
+
+/* Ajuste fino: todos os itens do menu inferior ocupam colunas iguais */
+.bottom-nav{grid-template-columns:repeat(4,minmax(0,1fr))!important;column-gap:0!important;padding-left:6px!important;padding-right:6px!important}
+.bottom-nav .nav-item{width:100%!important;min-width:0!important;justify-self:stretch!important;margin:0!important;transform:none!important}
+.bottom-nav .nav-item>span:last-child{width:100%;text-align:center;letter-spacing:-.1px}
+@media(max-width:370px){.bottom-nav{column-gap:0!important;padding-left:4px!important;padding-right:4px!important}.bottom-nav .nav-item{padding-left:0!important;padding-right:0!important}}
+
+
+/* Menu inferior: cinco colunas idênticas e conteúdo centralizado com espaçamento uniforme */
+.bottom-nav{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:0!important;padding-left:0!important;padding-right:0!important;justify-items:stretch!important}
+.bottom-nav .nav-item{box-sizing:border-box!important;width:100%!important;min-width:0!important;margin:0!important;padding:5px 0!important;display:grid!important;grid-template-rows:22px 14px!important;align-content:center!important;justify-items:center!important;align-items:center!important;gap:3px!important;transform:none!important}
+.bottom-nav .nav-item .nav-icon{width:22px!important;height:22px!important;min-width:22px!important;flex:none!important;display:grid!important;place-items:center!important;margin:0!important}
+.bottom-nav .nav-item .nav-icon svg{width:20px!important;height:20px!important;display:block!important}
+.bottom-nav .nav-item>span:last-child{display:block!important;width:100%!important;max-width:100%!important;margin:0!important;padding:0!important;text-align:center!important;white-space:nowrap!important;letter-spacing:-.25px!important;font-size:clamp(8px,2.5vw,10px)!important;line-height:14px!important}
+
+/* Correção definitiva: mesma distância livre entre cada botão do menu inferior */
+.bottom-nav{display:flex!important;justify-content:space-between!important;align-items:stretch!important;gap:0!important;width:100%!important;max-width:760px!important;padding-left:clamp(8px,2.5vw,18px)!important;padding-right:clamp(8px,2.5vw,18px)!important}
+.bottom-nav .nav-item{flex:0 0 auto!important;width:auto!important;min-width:0!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;padding:5px 2px!important;margin:0!important;transform:none!important}
+.bottom-nav .nav-item .nav-icon{flex:0 0 22px!important;width:22px!important;height:22px!important;margin:0 auto!important}
+.bottom-nav .nav-item>span:last-child{display:block!important;width:auto!important;max-width:none!important;white-space:nowrap!important;text-align:center!important;letter-spacing:-.25px!important}
+@media(max-width:370px){.bottom-nav{padding-left:6px!important;padding-right:6px!important}.bottom-nav .nav-item{padding-left:1px!important;padding-right:1px!important;font-size:9px!important}.bottom-nav .nav-item>span:last-child{font-size:9px!important;letter-spacing:-.3px!important}}
+
+/* Menu inferior revisado: barra contínua, quatro opções simétricas e sem deslocamentos */
+.bottom-nav{
+  position:fixed!important;left:0!important;right:0!important;bottom:0!important;
+  width:100%!important;max-width:none!important;margin:0!important;transform:none!important;
+  display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  justify-content:stretch!important;align-items:stretch!important;gap:4px!important;
+  padding:7px 10px calc(7px + env(safe-area-inset-bottom))!important;
+  background:rgba(255,255,255,.98)!important;border-top:1px solid #e1e7ef!important;
+  border-radius:0!important;box-shadow:0 -4px 16px rgba(18,39,68,.07)!important;
+}
+.bottom-nav .nav-item{
+  box-sizing:border-box!important;display:flex!important;flex:initial!important;
+  width:100%!important;min-width:0!important;min-height:54px!important;margin:0!important;
+  padding:5px 1px!important;border:0!important;border-radius:11px!important;
+  flex-direction:column!important;align-items:center!important;justify-content:center!important;
+  gap:3px!important;transform:none!important;font-size:10px!important;line-height:1.15!important;
+}
+.bottom-nav .nav-item .nav-icon{width:22px!important;height:22px!important;flex:0 0 22px!important;margin:0!important;display:grid!important;place-items:center!important;line-height:1!important}
+.bottom-nav .nav-item .nav-icon svg{display:block!important;width:20px!important;height:20px!important;max-width:100%!important;max-height:100%!important}
+.bottom-nav .nav-item>span:last-child{display:block!important;width:100%!important;max-width:100%!important;margin:0!important;padding:0!important;text-align:center!important;white-space:nowrap!important;letter-spacing:-.2px!important;font-size:clamp(8px,2.7vw,10px)!important;line-height:14px!important}
+@media(max-width:370px){.bottom-nav{gap:2px!important;padding-left:5px!important;padding-right:5px!important}.bottom-nav .nav-item{font-size:9px!important;min-height:52px!important}.bottom-nav .nav-item .nav-icon{width:20px!important;height:20px!important;flex-basis:20px!important}.bottom-nav .nav-item .nav-icon svg{width:18px!important;height:18px!important}.bottom-nav .nav-item>span:last-child{font-size:9px!important;letter-spacing:-.3px!important}}
+
+
+/* Cartão de saldo inspirado na paleta do Banco do Nordeste: azul, verde e dourado */
+.balance{
+  background:linear-gradient(125deg,#006b4f 0%,#00845a 58%,#0b6d80 100%) !important;
+  box-shadow:0 14px 32px rgba(0,105,77,.20) !important;
+}
+.balance:before,.balance:after{border-color:rgba(255,220,105,.24) !important}
+.balance:before{box-shadow:0 0 0 24px rgba(255,211,77,.055) !important}
+.eyebrow{color:#e0f4e8 !important}
+.hide-btn{border-color:rgba(255,225,137,.48) !important;background:rgba(255,255,255,.10) !important}
+.primary-action{color:#006b4f !important}
+.secondary-action{border:1px solid rgba(255,220,105,.42) !important;background:rgba(255,255,255,.10) !important}
+
+/* Tipografia do cartão alinhada à paleta verde, azul e dourada */
+.balance .eyebrow{color:#ffe6a0!important;letter-spacing:1.15px;font-weight:800}
+.balance .balance-amount{color:#ffffff!important;text-shadow:0 1px 1px rgba(0,45,34,.12)}
+.balance .hide-btn{color:#ffffff!important;font-weight:700}
+.balance .primary-action{background:#fffdf5!important;color:#006b4f!important;border-color:#ffe3a0!important;font-weight:800}
+.balance .secondary-action{color:#fff7d8!important;border-color:rgba(255,226,153,.65)!important;font-weight:800}
+
+
+/* Identidade visual unificada em todo o RIBEIRO — verde, azul-petróleo e dourado */
+:root{
+ --navy:#075b49;--navy2:#08765d;--bg:#f3f8f5;--card:#ffffff;
+ --ink:#203b34;--muted:#687f76;--line:#dce9e2;--blue:#087b78;
+ --yellow:#c99b2e;--green:#16815c;--orange:#b98535;--red:#c94c4c;
+ --radius:18px;--shadow:0 6px 20px rgba(5,91,73,.07)
+}
+body{background:var(--bg);color:var(--ink)}
+.topline{color:#668277}
+.brand h1,.section-heading h2,.page-title h2,.panel h3,.record-title,.record-amount,.history-item strong,.empty b,.modal-head h2{color:var(--navy)}
+.settings-btn{color:var(--navy);background:#fff;border-color:var(--line)}
+.balance{background:linear-gradient(125deg,#006b4f 0%,#00845a 58%,#0b6d80 100%)!important}
+.btn{background:var(--navy);color:#fff}
+.btn.light{background:#e8f2ec;color:var(--navy)}
+.btn.danger{background:#fff0ef;color:#b83d3d}
+.panel,.record,.summary-card,.stat,.empty{background:var(--card);border-color:var(--line);box-shadow:var(--shadow)}
+.summary-copy strong,.summary-total strong{color:var(--navy)}
+.summary-icon{background:#fff5d9;color:#a77b1e}
+.summary-card:nth-child(2) .summary-icon{background:#e4f4eb;color:#16815c}
+.summary-card:nth-child(3) .summary-icon{background:#e4f3f1;color:#087b78}
+.field label{color:#47665a}
+.field input,.field select,.field textarea,.search,.toolbar select{border-color:#d5e5dc;color:var(--ink)}
+.field input:focus,.field select:focus,.field textarea:focus,.search:focus{border-color:#55a68b;box-shadow:0 0 0 3px rgba(22,129,92,.10)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline-color:#72b89d}
+.pill{background:#edf4ef;color:#4c6b5d}
+.pill.pending{background:#fff4d8;color:#8b6719}
+.pill.paid{background:#e4f4eb;color:#18764f}
+.pill.overdue{background:#fff0ef;color:#b83d3d}
+.progress{background:#e5eee8}.progress span{background:linear-gradient(90deg,#16815c,#c99b2e)}
+.bottom-nav{background:rgba(255,255,255,.97);border-top-color:#dce9e2;box-shadow:0 -5px 20px rgba(5,91,73,.045)}
+.nav-item{color:#668076}.nav-item[data-view="debts"] .nav-icon{color:#c99b2e}.nav-item[data-view="loans"] .nav-icon{color:#16815c}.nav-item[data-view="sales"] .nav-icon{color:#087b78}
+.nav-item.active{background:#075b49;color:#fff}.nav-item.active .nav-icon{color:#fff}
+.modal{background:#f8fbf9;border-color:#e0ebe4}.modal-backdrop{background:rgba(12,43,34,.48)}
+.close{background:#e8f2ec;color:var(--navy)}
+.crop-stage{box-shadow:0 0 0 1px #d5e5dc,0 12px 30px rgba(5,91,73,.13)}
+.crop-control input{accent-color:#08765d}
+@media(max-width:480px){.balance{background:linear-gradient(125deg,#006b4f 0%,#00845a 58%,#0b6d80 100%)!important}}
+
+
+/* Identidade visual inspirada na imagem enviada: vinho, laranja e branco */
+:root{--navy:#A6193C;--navy2:#86132F;--bg:#FFF7F8;--card:#FFFFFF;--ink:#3C1722;--muted:#856A72;--line:#F0D9DF;--blue:#A6193C;--yellow:#F58220;--green:#A6193C;--orange:#F58220;--red:#B51F3F;--shadow:0 5px 18px rgba(117,18,48,.07)}
+meta[name="theme-color"]{color:#A6193C}
+body{background:var(--bg);color:var(--ink)}
+.topline{color:#B04A63}.brand h1,.section-heading h2,.page-title h2,.panel h3,.record-title,.record-amount,.history-item strong,.empty b,.modal-head h2,.summary-copy strong,.summary-total strong{color:var(--navy)}
+.settings-btn{color:var(--navy);background:#fff;border-color:var(--line)}
+.balance{background:linear-gradient(125deg,#A6193C 0%,#B51F43 65%,#F58220 130%)!important;box-shadow:0 12px 25px rgba(166,25,60,.18)}
+.btn,.nav-item.active{background:var(--navy);color:#fff}.btn.light,.close{background:#FBE8ED;color:var(--navy)}.btn.danger{background:#FFF0F1;color:#B51F3F}
+.panel,.record,.summary-card,.stat,.empty{background:var(--card);border-color:var(--line);box-shadow:var(--shadow)}
+.summary-icon{background:#FFF0E2;color:#E87518}.summary-card:nth-child(2) .summary-icon{background:#FBE8ED;color:#A6193C}.summary-card:nth-child(3) .summary-icon{background:#FFF0E2;color:#F58220}
+.field label{color:#754653}.field input,.field select,.field textarea,.search,.toolbar select{border-color:#E8CBD3;color:var(--ink)}
+.field input:focus,.field select:focus,.field textarea:focus,.search:focus{border-color:#D85A36;box-shadow:0 0 0 3px rgba(245,130,32,.13)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline-color:#F58220}
+.pill{background:#FBE8ED;color:#8C2944}.pill.pending{background:#FFF0D9;color:#A85A10}.pill.paid{background:#FBE8ED;color:#8C2944}.pill.overdue{background:#FFF0F1;color:#B51F3F}
+.progress{background:#F4DDE3}.progress span{background:linear-gradient(90deg,#A6193C,#F58220)}
+.bottom-nav{background:rgba(255,255,255,.97);border-top-color:#F0D9DF;box-shadow:0 -5px 20px rgba(117,18,48,.06)}.nav-item{color:#856A72}.nav-item[data-view="debts"] .nav-icon{color:#A6193C}.nav-item[data-view="loans"] .nav-icon{color:#A6193C}.nav-item[data-view="sales"] .nav-icon{color:#C33A50}.nav-item.active,.nav-item.active .nav-icon{color:#fff}
+.modal{background:#FFF7F8;border-color:#F0D9DF}.modal-backdrop{background:rgba(74,10,28,.5)}.crop-stage{box-shadow:0 0 0 1px #F0D9DF,0 12px 30px rgba(117,18,48,.13)}.crop-control input{accent-color:#A6193C}
+.positive{color:#A6193C!important}.negative{color:#B51F3F!important}
+
+/* Padroniza os dois botões do cartão de saldo com a mesma cor */
+.balance .primary-action,
+.balance .secondary-action{
+  background: rgba(255,255,255,.10) !important;
+  color: #fff7d8 !important;
+  border: 1px solid rgba(255,226,153,.65) !important;
+  font-weight: 800;
+}
+
+#openSettings,#avatarButton{position:relative;z-index:30;pointer-events:auto;touch-action:manipulation}
+</style>
+
+<style id="settings-photo-backup-redesign">
+.profile-photo-row{margin:2px 0 18px}.profile-photo-choice{width:100%;display:flex;align-items:center;gap:12px;text-align:left;border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px;color:var(--ink)}.settings-photo-preview{width:56px;height:56px;flex:0 0 56px;border-radius:50%;background:#f8e8ed;color:#A6193C;display:grid;place-items:center;font-size:17px;font-weight:800;overflow:hidden;border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}.settings-photo-preview img{width:100%;height:100%;display:block;object-fit:cover;border-radius:50%}.profile-photo-choice strong,.profile-photo-choice small{display:block}.profile-photo-choice strong{font-size:13px}.profile-photo-choice small{font-size:11px;color:var(--muted);margin-top:3px}.profile-photo-choice>span:nth-child(2){flex:1}.profile-chevron{font-size:24px;color:var(--muted)}.backup-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.backup-actions>*{width:100%;text-align:center;min-height:44px}.settings-option-list{display:grid;gap:9px}.settings-option{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:14px;border:1px solid var(--line);border-radius:13px;background:#fff;color:var(--ink);font-weight:700}.settings-option .option-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:11px;background:#f8e8ed;color:#A6193C;font-size:19px}.settings-option small{display:block;font-size:11px;color:var(--muted);font-weight:500;margin-top:2px}.crop-stage{width:min(78vw,300px);height:min(78vw,300px);touch-action:none}.crop-stage img{pointer-events:none!important;max-width:none!important;max-height:none!important}
+</style>
+<style id="profile-photo-final-fix">
+
+.goal-balance-card .balance-amount{margin:10px 0 2px;font-size:clamp(27px,7.5vw,37px)}
+.home-goal-target{position:relative;z-index:1;color:#dce7f5;font-size:12px;font-weight:650;margin-bottom:12px}
+.home-goal-progress{position:relative;z-index:1;height:7px;border-radius:99px;background:rgba(255,255,255,.2);overflow:hidden;margin:0 0 6px}
+.home-goal-progress span{display:block;width:0;height:100%;border-radius:99px;background:#9de2bd;transition:width .25s ease}
+.home-goal-progress-label{position:relative;z-index:1;display:flex;justify-content:space-between;gap:8px;color:#dce7f5;font-size:10px;margin-bottom:17px}
+.home-goal-progress-label span:last-child{text-align:right}
+#avatarButton{position:relative;overflow:hidden;border-radius:50%;padding:0!important;isolation:isolate}
+#avatarButton img{position:absolute;inset:0;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;border-radius:50%!important;display:block!important}
+.crop-stage{box-sizing:border-box;touch-action:none;overflow:hidden}
+.crop-stage img{max-width:none!important;max-height:none!important;transform:none!important}
+.crop-hint{pointer-events:none}
+</style>
+
+<style id="profile-settings-improvements">
+.profile-editor{padding-bottom:2px}.info-copy{font-size:13px;line-height:1.65;color:var(--ink)}.info-copy p{margin:0 0 12px}.info-copy p:last-child{margin-bottom:0}.settings-option{cursor:pointer}.settings-option:active,.profile-photo-choice:active{transform:scale(.995)}
+</style>
+
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <div class="brand"><div class="topline">SEU ESPAÇO FINANCEIRO</div><h1 id="displayName">Tony Ribeiro</h1></div>
+    <div class="header-actions"><button type="button" class="settings-btn" id="openSettings" aria-label="Abrir configurações" title="Configurações">⚙️</button><button type="button" class="avatar" id="avatarButton" aria-label="Abrir configurações da foto"><span id="avatarInitials">TR</span></button></div>
+  </header>
+
+  <main>
+    <section id="view-home" class="view active">
+      <div class="balance goal-balance-card">
+        <div class="balance-head"><span class="eyebrow" id="homeGoalName">HONDA CG160 Fan</span><button class="hide-btn" id="toggleBalance">◉ Ocultar valores</button></div>
+        <div class="balance-amount" id="balanceAmount">R$ 0,00</div>
+        <div class="home-goal-target" id="homeGoalTarget">Meta: R$ 4.000,00</div>
+        <div class="home-goal-progress"><span id="homeGoalProgress"></span></div>
+        <div class="home-goal-progress-label"><span id="homeGoalPercent">0% concluído</span><span id="homeGoalRemaining">R$ 4.000,00 restantes</span></div>
+        <div class="balance-actions"><button class="primary-action" id="addMoneyBtn">＋ Adicionar à meta</button><button class="secondary-action" id="addExpenseBtn">Registrar gasto</button></div>
+      </div>
+      <div class="section-heading"><h2>Controle financeiro</h2><p>Escolha o que deseja organizar.</p></div>
+      <div class="summary-list">
+        <button class="summary-card" data-go="debts"><span class="summary-copy"><strong>Minhas dívidas</strong><span>O que preciso pagar</span></span><span class="summary-total"><strong id="debtTotal">R$ 0,00</strong></span></button>
+        <button class="summary-card" data-go="loans"><span class="summary-copy"><strong>Empréstimos</strong><span>Dinheiro emprestado a pessoas</span></span><span class="summary-total"><strong id="loanTotal">R$ 0,00</strong></span></button>
+        <button class="summary-card" data-go="sales"><span class="summary-copy"><strong>Vendas de produtos</strong><span>Quem ainda me deve por uma venda</span></span><span class="summary-total"><strong id="salesTotal">R$ 0,00</strong></span></button>
+      </div>
+      <div class="hidden" aria-hidden="true"><span id="incomeTotal"></span><span id="expenseTotal"></span><span id="vaultTotal"></span><span id="goalsCount"></span><div id="recentHistory"></div></div>
+    </section>
+
+    <section id="view-debts" class="view">
+      <div class="page-title"><div><h2>Minhas dívidas</h2><p>Organize o que precisa pagar.</p></div><button class="btn" id="newDebt">＋ Nova dívida</button></div>
+      <div class="stat-grid"><div class="stat"><span>Total pendente</span><strong id="debtsPageTotal">R$ 0,00</strong></div><div class="stat"><span>Vencidas</span><strong id="debtsOverdue">R$ 0,00</strong></div></div>
+      <div class="toolbar"><input class="search" id="debtSearch" placeholder="Buscar dívida ou credor…"><select id="debtFilter"><option value="all">Todas</option><option value="pending">Pendentes</option><option value="overdue">Vencidas</option><option value="paid">Pagas</option></select></div>
+      <div id="debtList" class="record-list"></div>
+    </section>
+
+    <section id="view-loans" class="view">
+      <div class="page-title"><div><h2>Empréstimos</h2><p>Dinheiro que emprestei e preciso receber.</p></div><button class="btn" id="newLoan">＋ Novo</button></div>
+      <div class="stat-grid"><div class="stat"><span>A receber</span><strong id="loansPageTotal">R$ 0,00</strong></div><div class="stat"><span>Em aberto</span><strong id="loansOpenCount">0</strong></div></div>
+      <div class="toolbar"><input class="search" id="loanSearch" placeholder="Buscar por pessoa…"><select id="loanFilter"><option value="all">Todos</option><option value="pending">Pendentes</option><option value="overdue">Vencidos</option><option value="paid">Quitados</option></select></div>
+      <div id="loanList" class="record-list"></div>
+    </section>
+
+    <section id="view-sales" class="view">
+      <div class="page-title"><div><h2>Vendas de produtos</h2><p>Acompanhe produtos vendidos e pagamentos.</p></div><button class="btn" id="newSale">＋ Nova venda</button></div>
+      <div class="stat-grid"><div class="stat"><span>A receber</span><strong id="salesPageTotal">R$ 0,00</strong></div><div class="stat"><span>Vendas registradas</span><strong id="salesCount">0</strong></div></div>
+      <div class="toolbar"><input class="search" id="saleSearch" placeholder="Buscar produto ou comprador…"><select id="saleFilter"><option value="all">Todas</option><option value="pending">Pendentes</option><option value="overdue">Vencidas</option><option value="paid">Quitadas</option></select></div>
+      <div id="saleList" class="record-list"></div>
+    </section>
+
+    <section id="view-history" class="view">
+      <div class="page-title"><div><h2>Histórico financeiro</h2><p>Entradas, gastos e movimentações registradas.</p></div></div>
+      <div class="toolbar"><input class="search" id="historySearch" placeholder="Buscar movimentação…"><select id="historyFilter"><option value="all">Todos os tipos</option><option value="income">Entradas</option><option value="expense">Gastos</option><option value="debt_payment">Pagamentos de dívidas</option><option value="loan_receipt">Recebimentos de empréstimos</option><option value="sale_receipt">Recebimentos de vendas</option><option value="goal_contribution">Aportes para metas</option><option value="vault_deposit">Transferências para metas</option><option value="vault_withdraw">Retiradas do cofre</option></select></div>
+      <div class="panel"><div id="historyList"></div></div>
+    </section>
+
+    <section id="view-settings" class="view">
+      <div class="page-title"><div><h2>Configurações</h2><p>Personalize seu espaço financeiro.</p></div></div>
+      <div class="panel"><h3>Meu perfil</h3><button class="settings-option" id="settingsProfileButton" type="button" style="width:100%;text-align:left;display:flex;align-items:center;gap:12px;border:0;background:transparent;padding:8px 0;color:inherit"><span class="settings-photo-preview" id="settingsPhotoPreview" style="width:48px;height:48px;flex:0 0 48px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:#edf2f8;font-weight:800">TR</span><span><strong>Foto de perfil e nome</strong><small style="display:block;color:var(--muted)">Toque aqui para alterar sua foto ou seu nome.</small></span><span style="margin-left:auto;font-size:24px">›</span></button></div>
+      <div class="panel"><h3>Preferências financeiras</h3><form id="settingsForm"><div class="form-grid"><div class="field"><label for="initialBalance">Saldo inicial (R$)</label><input id="initialBalance" type="number" step="0.01" min="0" required></div><div class="field"><label for="hideByDefault">Ocultar saldo</label><select id="hideByDefault"><option value="false">Não</option><option value="true">Sim</option></select></div></div><div class="form-actions"><button class="btn" type="submit">Salvar alterações</button></div></form></div>
+      <div class="panel"><h3>Salvar e recuperar dados</h3><p class="note">Baixe uma cópia de segurança com seus registros financeiros e sua foto. Se trocar de aparelho ou perder os dados do navegador, use essa cópia para restaurar tudo.</p><div class="backup-actions"><button class="btn" id="exportJson" type="button">⬇️ Salvar dados</button><label class="btn light file-label">↩️ Restaurar dados<input id="importJson" type="file" accept=".json,application/json" hidden></label></div><p class="note" style="margin-top:10px">O arquivo JSON será salvo em Arquivos/Downloads, conforme as opções do seu dispositivo. Guarde-o em um lugar seguro.</p></div>
+      <div class="panel"><h3>Privacidade e segurança</h3><div class="settings-option-list"><button class="settings-option" id="dataInfoButton" type="button"><span class="option-icon">🔒</span><span>Onde meus dados ficam?<small>Entenda como seus dados são armazenados.</small></span></button><button class="settings-option" id="termsButton" type="button"><span class="option-icon">📄</span><span>Termos de uso<small>Boas práticas para usar o RIBEIRO.</small></span></button></div></div>
+    </section>
+  </main>
+</div>
+
+<nav class="bottom-nav" aria-label="Navegação principal">
+  <button class="nav-item active" data-view="home"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7M5.5 9v12h13V9M9.5 21v-7h5v7"/></svg></span><span>Início</span></button>
+  <button class="nav-item" data-view="debts"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18M7 15h4"/></svg></span><span>Dívidas</span></button>
+  <button class="nav-item" data-view="loans"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M14.8 9.2c-.5-.7-1.3-1-2.5-1-1.5 0-2.5.8-2.5 1.9 0 2.8 5.4 1.1 5.4 4 0 1.2-1.1 2.1-2.8 2.1-1.2 0-2.3-.4-3-1.3M12 5.5v13"/></svg></span><span>Empréstimos</span></button>
+  <button class="nav-item" data-view="sales"><span class="nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2M12 12v4"/></svg></span><span>Vendas</span></button>
+</nav>
+
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><div class="modal-head"><h2 id="modalTitle">Adicionar registro</h2><button class="close" id="closeModal" aria-label="Fechar">×</button></div><div id="modalBody"></div></div></div>
+<div class="toast" id="toast" role="status"></div>
+<input id="profilePhotoNative" type="file" accept="image/*" aria-label="Escolher foto de perfil" style="position:fixed;left:-10000px;top:0;width:1px;height:1px;opacity:0;">
+
+<script>
+(() => {
+'use strict';
+const KEY='ribeiro_financas_v1';
+const PHOTO_KEY='ribeiro_profile_photo_v1';
+const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+const uid=()=>`${Date.now().toString(36)}${Math.random().toString(36).slice(2,8)}`;
+const money=n=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(Number(n)||0);
+const dateBR=s=>{if(!s)return '—';const p=String(s).slice(0,10).split('-');return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:s};
+const num=v=>Math.max(0,Number(v)||0);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const defaultState=()=>({profile:{name:'Tony Ribeiro',photo:'',initialBalance:0,hideByDefault:false},hidden:false,debts:[],loans:[],sales:[],goals:[],vault:[],transactions:[]});
+let state;
+try{state={...defaultState(),...JSON.parse(localStorage.getItem(KEY)||'{}')};state.profile={...defaultState().profile,...(state.profile||{})};['debts','loans','sales','goals','vault','transactions'].forEach(k=>{if(!Array.isArray(state[k]))state[k]=[]});}catch{state=defaultState()}
+function readProfilePhoto(){try{return localStorage.getItem(PHOTO_KEY)||JSON.parse(localStorage.getItem(KEY)||'{}').profile?.photo||'';}catch(err){console.warn('Não foi possível ler a foto de perfil:',err);return '';}}
+try{/* Migra fotos gravadas por versões antigas no JSON para a chave dedicada ANTES de remover a cópia antiga. */const legacyPhoto=JSON.parse(localStorage.getItem(KEY)||'{}').profile?.photo||'';const dedicatedPhoto=localStorage.getItem(PHOTO_KEY)||'';if(!dedicatedPhoto&&legacyPhoto){try{localStorage.setItem(PHOTO_KEY,legacyPhoto);}catch(migrationError){console.warn('Não foi possível migrar a foto antiga; ela será mantida na memória nesta sessão.',migrationError);}}const savedPhoto=localStorage.getItem(PHOTO_KEY)||legacyPhoto;if(savedPhoto)state.profile.photo=savedPhoto;}catch(err){console.warn('Não foi possível recuperar a foto de perfil:',err)}
+/* Meta fixa do usuário: Honda CG160 Fan, sempre disponível no cartão inicial. */
+let seededHondaGoal=false;
+const existingHonda=state.goals.find(g=>String(g.name||'').trim().toLocaleLowerCase('pt-BR').replace(/\s+/g,'')==='hondacg160fan');
+state.goals.forEach(g=>g.featured=false);
+if(existingHonda){
+ existingHonda.name='HONDA CG160 Fan';
+ existingHonda.target=4000;
+ existingHonda.featured=true;
+ if(!Number.isFinite(Number(existingHonda.saved)))existingHonda.saved=0;
+}else{
+ state.goals.unshift({id:uid(),name:'HONDA CG160 Fan',target:4000,saved:0,due:'',description:'Meta para comprar a Honda CG 160 Fan.',featured:true,createdAt:Date.now()});
+ seededHondaGoal=true;
+}
+state.hondaGoalInitialized=true;
+const $=id=>document.getElementById(id);
+/* Liga os acessos às configurações no início da inicialização, antes dos demais módulos. */
+$('openSettings').addEventListener('click',e=>{if(typeof window.openRibeiroSettings==='function')window.openRibeiroSettings(e);});
+$('avatarButton').addEventListener('click',e=>{if(typeof window.openRibeiroProfileEditor==='function')window.openRibeiroProfileEditor(e);});
+$('settingsProfileButton').addEventListener('click',e=>{if(typeof window.openRibeiroProfileEditor==='function')window.openRibeiroProfileEditor(e);});
+const save=()=>{try{/* A imagem é guardada SOMENTE em PHOTO_KEY. Nunca a copie para o JSON financeiro: isso duplicava vários KB/MB e podia estourar a quota do Safari ao salvar configurações. */const persisted={...state,profile:{...state.profile,photo:''}};localStorage.setItem(KEY,JSON.stringify(persisted));const check=JSON.parse(localStorage.getItem(KEY)||'null');if(!check||!check.profile)throw new Error('Não foi possível confirmar a gravação dos dados.');const photoAfter=readProfilePhoto();state.profile.photo=photoAfter||state.profile.photo||'';return true;}catch(e){console.error('Falha ao salvar os dados do RIBEIRO:',e);toast('Não foi possível salvar os dados neste navegador. Verifique o espaço disponível e tente novamente.');return false;}};
+save();
+const toast=msg=>{const el=$('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('show'),2600)};
+const remaining=r=>Math.max(0,num(r.total??r.amount)-num(r.paid??r.received));
+const isPaid=r=>remaining(r)<0.005;
+const isOverdue=r=>!isPaid(r)&&r.due&&r.due<today();
+const totalRemaining=arr=>arr.reduce((s,r)=>s+remaining(r),0);
+const balance=()=>num(state.profile.initialBalance)+state.transactions.reduce((s,t)=>s+(t.balanceDelta||0),0);
+function tx(type,description,amount,category='',date=today(),notes='',balanceDelta=null,ref=''){
+ state.transactions.unshift({id:uid(),type,description,amount:num(amount),category,date,notes,balanceDelta:balanceDelta===null?0:balanceDelta,ref,createdAt:Date.now()});
+}
+function updateProfile(){const savedPhoto=readProfilePhoto();if(savedPhoto)state.profile.photo=savedPhoto;const photo=state.profile.photo||'';$('displayName').textContent=state.profile.name||'Tony Ribeiro';const initials=esc((state.profile.name||'TR').split(/\s+/).slice(0,2).map(x=>x[0]||'').join('').toUpperCase());$('avatarButton').innerHTML=photo?`<img src="${photo}" alt="Foto de perfil">`:`<span>${initials}</span>`;const preview=$('settingsPhotoPreview');if(preview)preview.innerHTML=photo?`<img src="${photo}" alt="Foto de perfil" style="width:100%;height:100%;object-fit:cover">`:initials;}
+window.ribeiroSaveProfilePhoto=function(photo){let previous='';try{if(typeof photo!=='string'||!/^data:image\/(png|jpeg|webp|gif);base64,/i.test(photo))throw new Error('Formato de imagem inválido.');previous=readProfilePhoto();/* Fonte única da foto: evita duplicação no JSON e erros de quota do Safari. */localStorage.setItem(PHOTO_KEY,photo);if(localStorage.getItem(PHOTO_KEY)!==photo)throw new Error('O navegador não confirmou a gravação da foto.');state.profile.photo=photo;updateProfile();return true;}catch(err){console.error('Falha ao salvar foto de perfil:',err);try{if(previous){localStorage.setItem(PHOTO_KEY,previous);state.profile.photo=previous;}else{localStorage.removeItem(PHOTO_KEY);state.profile.photo='';}updateProfile();}catch(restoreErr){console.error('Falha ao restaurar foto anterior:',restoreErr);}toast(err&&err.name==='QuotaExceededError'?'O Safari ficou sem espaço para salvar a foto. Tente outra imagem menor.':(err.message||'Não foi possível salvar a foto.'));return false;}};
+function showView(name){document.querySelectorAll('.view').forEach(v=>{const active=v.id===`view-${name}`;v.classList.toggle('active',active);v.style.display=active?'block':'none';});document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.view===name));if(name==='settings')fillSettings();renderAll();window.scrollTo({top:0,behavior:'smooth'});}
+function hiddenMoney(n){return state.hidden?'••••••':money(n)}
+function ensureFixedHondaGoal(){
+ if(!Array.isArray(state.goals))state.goals=[];
+ let g=state.goals.find(x=>String(x.name||'').toLocaleLowerCase('pt-BR').replace(/[^a-z0-9]/g,'')==='hondacg160fan');
+ if(!g){g={id:uid(),name:'HONDA CG160 Fan',target:4000,saved:0,due:'',description:'Meta fixa para comprar a Honda CG160 Fan.',featured:true,createdAt:Date.now()};state.goals.unshift(g);}
+ g.name='HONDA CG160 Fan';g.target=4000;g.featured=true;
+ if(!Number.isFinite(Number(g.saved))||Number(g.saved)<0)g.saved=0;
+ state.goals.forEach(x=>{if(x!==g)x.featured=false;});
+ return g;
+}
+function renderHome(){
+ const featuredGoal=ensureFixedHondaGoal();
+ $('toggleBalance').textContent=state.hidden?'◉ Mostrar valores':'◉ Ocultar valores';
+ if(featuredGoal){
+  const target=num(featuredGoal.target),saved=num(featuredGoal.saved),pct=target>0?Math.min(100,Math.round(saved/target*100)):0;
+  $('homeGoalName').textContent=featuredGoal.name||'MINHA META';
+  $('balanceAmount').textContent=state.hidden?'••••••':money(saved);
+  $('homeGoalTarget').textContent='Meta: '+(state.hidden?'••••••':money(target));
+  $('homeGoalProgress').style.width=pct+'%';
+  $('homeGoalPercent').textContent=state.hidden?'••% concluído':pct+'% concluído';
+  $('homeGoalRemaining').textContent=pct>=100?'🎉 Meta alcançada!':(state.hidden?'Valor restante oculto':money(Math.max(0,target-saved))+' restantes');
+  $('addMoneyBtn').textContent=pct>=100?'＋ Adicionar à meta':'＋ Adicionar à meta';
+ }else{
+  $('homeGoalName').textContent='HONDA CG160 Fan';$('balanceAmount').textContent=state.hidden?'••••••':money(0);
+  $('homeGoalTarget').textContent='Meta: '+(state.hidden?'••••••':money(4000));
+  $('homeGoalProgress').style.width='0%';$('homeGoalPercent').textContent='0% concluído';$('homeGoalRemaining').textContent=state.hidden?'Valor restante oculto':money(4000)+' restantes';
+  $('addMoneyBtn').textContent='＋ Adicionar à meta';
+ }
+ $('debtTotal').textContent=money(totalRemaining(state.debts));$('loanTotal').textContent=money(totalRemaining(state.loans));$('salesTotal').textContent=money(totalRemaining(state.sales));
+ $('incomeTotal').textContent=money(state.transactions.filter(t=>t.type==='income'||t.type==='loan_receipt'||t.type==='sale_receipt').reduce((s,t)=>s+t.amount,0));
+ $('expenseTotal').textContent=money(state.transactions.filter(t=>t.type==='expense'||t.type==='debt_payment').reduce((s,t)=>s+t.amount,0));
+ $('vaultTotal').textContent=money(state.vault.reduce((s,v)=>s+v.delta,0));$('goalsCount').textContent=state.goals.filter(g=>num(g.saved)<num(g.target)).length;
+ const recent=state.transactions.slice(0,4);$('recentHistory').innerHTML=recent.length?recent.map(historyRow).join(''):'<div class="empty"><b>Nenhuma movimentação ainda</b>Suas entradas e gastos aparecerão aqui.</div>';
+}
+function statusPill(r){return isPaid(r)?'<span class="pill paid">Quitado</span>':isOverdue(r)?'<span class="pill overdue">Vencido</span>':'<span class="pill pending">Pendente</span>'}
+function recordCard(r,type){
+ const name=type==='debts'?r.name:type==='loans'?r.person:r.product;
+ const sub=type==='debts'?`${r.creditor||'Credor não informado'}${r.category?' · '+r.category:''}`:type==='loans'?`Pessoa: ${r.person}`:`Comprador: ${r.buyer||'Não informado'} · Qtd: ${r.quantity||1}`;
+ const rest=remaining(r), total=num(r.total??r.amount);
+ return `<article class="record"><div class="record-top"><div style="min-width:0"><div class="record-title">${esc(name||'Sem nome')}</div><div class="record-sub">${esc(sub)}</div><div class="record-sub">${type==='debts'?'Vencimento':type==='loans'?'Pagamento combinado':'Pagamento previsto'}: ${dateBR(r.due)}</div></div><div class="record-amount">${money(rest)}<small>de ${money(total)} pendente</small></div></div><div class="record-meta">${statusPill(r)}<span class="pill">${type==='debts'?'Pago: '+money(r.paid):type==='loans'?'Recebido: '+money(r.received):'Recebido: '+money(r.received)}</span></div>${r.description?`<div class="record-sub" style="margin-top:9px">${esc(r.description)}</div>`:''}<div class="record-actions">${!isPaid(r)?`<button class="btn small" data-action="pay" data-type="${type}" data-id="${r.id}">＋ Registrar pagamento</button>`:''}<button class="btn light small" data-action="edit" data-type="${type}" data-id="${r.id}">Editar</button><button class="btn danger small" data-action="delete" data-type="${type}" data-id="${r.id}">Excluir</button></div></article>`;
+}
+function renderRecords(type){
+ const search=$(type==='debts'?'debtSearch':type==='loans'?'loanSearch':'saleSearch').value.toLowerCase().trim();
+ const filter=$(type==='debts'?'debtFilter':type==='loans'?'loanFilter':'saleFilter').value;
+ const list=state[type].filter(r=>{
+  const label=type==='debts'?`${r.name} ${r.creditor} ${r.description}`:type==='loans'?`${r.person} ${r.description}`:`${r.product} ${r.buyer} ${r.description}`;
+  const status=isPaid(r)?'paid':isOverdue(r)?'overdue':'pending';
+  return label.toLowerCase().includes(search)&&(filter==='all'||filter===status);
+ });
+ $(type==='debts'?'debtList':type==='loans'?'loanList':'saleList').innerHTML=list.length?list.map(r=>recordCard(r,type)).join(''):`<div class="empty"><b>Nenhum registro encontrado</b>Toque em “${type==='debts'?'Nova dívida':type==='loans'?'Novo':'Nova venda'}” para adicionar.</div>`;
+ if(type==='debts'){$('debtsPageTotal').textContent=money(totalRemaining(state.debts));$('debtsOverdue').textContent=money(state.debts.filter(isOverdue).reduce((s,r)=>s+remaining(r),0))}
+ if(type==='loans'){$('loansPageTotal').textContent=money(totalRemaining(state.loans));$('loansOpenCount').textContent=state.loans.filter(r=>!isPaid(r)).length}
+ if(type==='sales'){$('salesPageTotal').textContent=money(totalRemaining(state.sales));$('salesCount').textContent=state.sales.length}
+}
+const typeNames={income:'Entrada',expense:'Gasto',debt_payment:'Pagamento de dívida',loan_receipt:'Recebimento de empréstimo',sale_receipt:'Recebimento de venda',vault_deposit:'Transferência para meta',vault_withdraw:'Retirada do cofre',goal_contribution:'Aporte para meta'};
+function historyRow(t){const positive=['income','loan_receipt','sale_receipt','vault_withdraw','goal_contribution'].includes(t.type);return `<div class="history-item"><div><strong>${esc(t.description)}</strong><small>${esc(typeNames[t.type]||t.type)}${t.category?' · '+esc(t.category):''} · ${dateBR(t.date)}</small>${t.notes?`<small style="display:block">${esc(t.notes)}</small>`:''}</div><strong class="${positive?'positive':'negative'}">${positive?'+':'−'}${money(t.amount)}</strong></div>`}
+function renderHistory(){
+ const q=$('historySearch').value.toLowerCase().trim(),f=$('historyFilter').value;
+ const list=state.transactions.filter(t=>(f==='all'||t.type===f)&&`${t.description} ${t.category} ${t.notes} ${typeNames[t.type]||''}`.toLowerCase().includes(q));
+ $('historyList').innerHTML=list.length?list.map(historyRow).join(''):'<div class="empty"><b>Nenhuma movimentação encontrada</b>Altere os filtros ou registre uma operação.</div>';
+}
+function renderGoals(){
+ const savedTotal=state.goals.reduce((sum,g)=>sum+num(g.saved),0);
+ const targetTotal=state.goals.reduce((sum,g)=>sum+num(g.target),0);
+ $('goalsSavedTotal').textContent=money(savedTotal);
+ $('goalsTargetTotal').textContent=money(targetTotal);
+ $('goalsDone').textContent=state.goals.filter(g=>num(g.saved)>=num(g.target)&&num(g.target)>0).length;
+ $('goalsOpen').textContent=state.goals.filter(g=>num(g.saved)<num(g.target)).length;
+ $('goalList').innerHTML=state.goals.length?state.goals.map(g=>{
+  const pct=g.target?Math.min(100,Math.round(num(g.saved)/num(g.target)*100)):0;
+  return `<article class="record"><div class="record-top"><div style="min-width:0"><div class="record-title">${esc(g.name)}</div><div class="record-sub">${esc(g.description||'Meta financeira')}${g.due?' · Prazo: '+dateBR(g.due):''}</div></div><div class="record-amount">${money(g.saved)}<small>de ${money(g.target)}</small></div></div><div class="progress"><span style="width:${pct}%"></span></div><div class="progress-label"><span>${pct}% concluído</span><span>${pct>=100?'🎉 Meta alcançada!':money(Math.max(0,g.target-g.saved))+' restantes'}</span></div><div class="record-actions">${pct<100?`<button class="btn small" data-action="goal-add" data-id="${g.id}">＋ Adicionar dinheiro</button>`:''}<button class="btn light small" data-action="goal-edit" data-id="${g.id}">Editar</button><button class="btn danger small" data-action="goal-delete" data-id="${g.id}">Excluir</button></div></article>`
+ }).join(''):'<div class="empty"><b>Você ainda não criou metas</b>Crie um objetivo, defina quanto quer juntar e acompanhe seu progresso aqui.</div>';
+}
+function renderAll(){renderHome();renderRecords('debts');renderRecords('loans');renderRecords('sales');renderHistory();updateProfile()}
+function field(label,id,type='text',required=false,value='',extra=''){return `<div class="field"><label for="${id}">${label}${required?' *':''}</label><input id="${id}" name="${id}" type="${type}" ${required?'required':''} value="${esc(value)}" ${extra}></div>`}
+function textarea(label,id,value=''){return `<div class="field full"><label for="${id}">${label}</label><textarea id="${id}">${esc(value)}</textarea></div>`}
+function openModal(title,body){$('modalTitle').textContent=title;$('modalBody').innerHTML=body;$('modalBackdrop').classList.add('open');document.body.style.overflow='hidden';const first=$('modalBody').querySelector('input:not([type=hidden]),select,textarea');if(first)setTimeout(()=>first.focus({preventScroll:true}),100)}
+function closeModal(){$('modalBackdrop').classList.remove('open');document.body.style.overflow=''}
+function formRecord(type,r={}){
+ const edit=!!r.id;const isDebt=type==='debts',isLoan=type==='loans';
+ const title=isDebt?'dívida':isLoan?'empréstimo':'venda';
+ let fields='';
+ if(isDebt) fields=`${field('Nome da pessoa ou dívida','rName','text',true,r.name||r.creditor||'','maxlength="100"')}${field('Valor (R$)','rTotal','number',true,r.total??'','min="0.01" step="0.01"')}${field('Data','rDue','date',true,r.due||r.date||today())}`;
+ else if(isLoan) fields=`${field('Nome da pessoa','rPerson','text',true,r.person||'','maxlength="100"')}${field('Valor emprestado (R$)','rTotal','number',true,r.total??'','min="0.01" step="0.01"')}${field('Valor já recebido (R$)','rReceived','number',false,r.received??0,'min="0" step="0.01"')}${field('Data do empréstimo','rDate','date',true,r.date||today())}${field('Data combinada para pagamento','rDue','date',false,r.due||'')}${textarea('Descrição','rDescription',r.description||'')}${textarea('Observações','rNotes',r.notes||'')}`;
+ else fields=`${field('Nome do produto','rProduct','text',true,r.product||'','maxlength="100"')}${field('Nome da pessoa','rBuyer','text',true,r.buyer||'','maxlength="100"')}${field('Data em que vendi','rDate','date',true,r.date||today())}${field('Valor da venda (R$)','rTotal','number',true,r.total??'','min="0.01" step="0.01"')}`;
+ openModal(`${edit?'Editar':'Cadastrar'} ${title}`,`<form id="recordForm"><div class="form-grid">${fields}</div><div class="form-actions"><button type="button" class="btn light" id="cancelForm">Cancelar</button><button class="btn" type="submit">Salvar ${title}</button></div></form>`);
+ $('cancelForm').onclick=closeModal;
+ $('recordForm').onsubmit=e=>{e.preventDefault();let item={...r,id:r.id||uid(),createdAt:r.createdAt||Date.now()};
+ if(isDebt){item.name=$('rName').value.trim();item.creditor=r.creditor||'';item.total=num($('rTotal').value);item.paid=num(r.paid||0);item.due=$('rDue').value;item.date=$('rDue').value;item.category=r.category||'Outros';item.description=r.description||'';item.notes=r.notes||'';if(item.paid>item.total)return toast('O valor pago não pode superar a dívida.')}
+ else if(isLoan){item.person=$('rPerson').value.trim();item.total=num($('rTotal').value);item.received=num($('rReceived').value);item.date=$('rDate').value;item.due=$('rDue').value;item.description=$('rDescription').value.trim();item.notes=$('rNotes').value.trim();if(item.received>item.total)return toast('O valor recebido não pode superar o empréstimo.')}
+ else {item.product=$('rProduct').value.trim();item.buyer=$('rBuyer').value.trim();item.date=$('rDate').value;item.total=num($('rTotal').value);item.received=num(r.received||0);item.quantity=1;item.unit=item.total;item.due=r.due||'';item.payment=r.payment||'';item.description='';item.notes=r.notes||'';if(item.received>item.total)return toast('O valor já recebido não pode superar a venda.')}
+ const arr=state[type],idx=arr.findIndex(x=>x.id===item.id);if(idx>=0)arr[idx]=item;else arr.unshift(item);
+ if(type==='loans'||type==='sales'){const initial=num(isLoan?item.received:item.received);if(!edit&&initial>0){tx(isLoan?'loan_receipt':'sale_receipt',isLoan?`Recebimento inicial — ${item.person}`:`Recebimento inicial — ${item.product}`,initial,isLoan?'Empréstimos':'Vendas',item.date||today(),item.notes,initial,item.id)}}
+ save();closeModal();renderAll();toast(edit?'Registro atualizado.':'Registro salvo com sucesso.');
+ };
+}
+function paymentForm(type,id){const r=state[type].find(x=>x.id===id);if(!r)return;const label=type==='debts'?'pagamento': 'recebimento';const left=remaining(r);openModal(`Registrar ${label}`,`<p class="note">Valor pendente: <b>${money(left)}</b></p><form id="paymentForm"><div class="form-grid">${field('Valor desta movimentação (R$)','payAmount','number',true,'','min="0.01" step="0.01" max="'+left.toFixed(2)+'"')}${field('Data','payDate','date',true,today())}${textarea('Observações','payNotes','')}</div><div class="form-actions"><button type="button" class="btn light" id="cancelForm">Cancelar</button><button class="btn" type="submit">Confirmar</button></div></form>`);$('cancelForm').onclick=closeModal;$('paymentForm').onsubmit=e=>{e.preventDefault();const amount=num($('payAmount').value);if(amount<=0||amount>left+0.001)return toast('Informe um valor válido, até o saldo pendente.');const date=$('payDate').value||today(),notes=$('payNotes').value.trim();if(type==='debts'){r.paid=num(r.paid)+amount;tx('debt_payment',`Pagamento — ${r.name}`,amount,r.category||'Dívidas',date,notes,-amount,r.id)}else if(type==='loans'){r.received=num(r.received)+amount;tx('loan_receipt',`Recebimento — ${r.person}`,amount,'Empréstimos',date,notes,amount,r.id)}else{r.received=num(r.received)+amount;tx('sale_receipt',`Recebimento — ${r.product}`,amount,'Vendas',date,notes,amount,r.id)}save();closeModal();renderAll();toast('Pagamento registrado com sucesso.')}}
+function cashForm(kind){const income=kind==='income';openModal(income?'Adicionar dinheiro':'Registrar gasto',`<form id="cashForm"><div class="form-grid">${field('Descrição','cashDesc','text',true,'','maxlength="100"')}${field('Valor (R$)','cashAmount','number',true,'','min="0.01" step="0.01"')}${field('Data','cashDate','date',true,today())}<div class="field"><label for="cashCategory">Categoria</label><select id="cashCategory">${(income?['Renda','Presente','Reembolso','Outros']:['Alimentação','Casa','Transporte','Contas','Compras','Saúde','Outros']).map(x=>`<option>${x}</option>`).join('')}</select></div>${textarea('Observações','cashNotes','')}</div><div class="form-actions"><button type="button" class="btn light" id="cancelForm">Cancelar</button><button class="btn" type="submit">Salvar</button></div></form>`);$('cancelForm').onclick=closeModal;$('cashForm').onsubmit=e=>{e.preventDefault();const amount=num($('cashAmount').value);if(!amount)return toast('Informe um valor maior que zero.');tx(kind,$('cashDesc').value.trim(),amount,$('cashCategory').value,$('cashDate').value||today(),$('cashNotes').value.trim(),income?amount:-amount);save();closeModal();renderAll();toast(income?'Entrada adicionada.':'Gasto registrado.')}}
+function goalForm(g={}){const edit=!!g.id;const hasFeatured=state.goals.some(x=>x.featured);const isFeatured=!!g.featured||(!hasFeatured&&(!g.id||state.goals[0]?.id===g.id));openModal(edit?'Editar meta':'Criar meta',`<form id="goalForm"><div class="form-grid">${field('Nome da meta','gName','text',true,g.name||'','maxlength="100"')}${field('Valor desejado (R$)','gTarget','number',true,g.target??'','min="0.01" step="0.01"')}${field('Valor já guardado (R$)','gSaved','number',false,g.saved??0,'min="0" step="0.01"')}${field('Data desejada para conclusão','gDue','date',false,g.due||'')}${textarea('Descrição','gDescription',g.description||'')}<div class="field full"><label style="display:flex;align-items:center;gap:9px;font-size:12px"><input id="gFeatured" type="checkbox" ${isFeatured?'checked':''} style="width:17px;height:17px;accent-color:var(--navy)"> Mostrar esta meta na tela inicial</label><small class="note">A tela inicial acompanha automaticamente o valor guardado nesta meta.</small></div></div><div class="form-actions"><button type="button" class="btn light" id="cancelForm">Cancelar</button><button class="btn" type="submit">Salvar meta</button></div></form>`);$('cancelForm').onclick=closeModal;$('goalForm').onsubmit=e=>{e.preventDefault();const makeFeatured=$('gFeatured').checked;const obj={...g,id:g.id||uid(),name:$('gName').value.trim(),target:num($('gTarget').value),saved:num($('gSaved').value),due:$('gDue').value,description:$('gDescription').value.trim(),featured:makeFeatured};if(obj.saved>obj.target)return toast('O valor guardado não pode superar a meta.');const idx=state.goals.findIndex(x=>x.id===obj.id);const previous=JSON.stringify(state);if(makeFeatured)state.goals.forEach(x=>x.featured=false);if(idx>=0)state.goals[idx]=obj;else state.goals.unshift(obj);if(!state.goals.some(x=>x.featured)&&state.goals.length)state.goals[0].featured=true;if(!save()){state=JSON.parse(previous);renderAll();return}closeModal();renderAll();toast('Meta salva.')}}
+function goalAdd(id){const g=state.goals.find(x=>x.id===id);if(!g)return;openModal('Adicionar dinheiro à meta',`<p class="note">Meta: <b>${esc(g.name)}</b> · Faltam ${money(Math.max(0,g.target-g.saved))}.</p><form id="goalAddForm"><div class="form-grid">${field('Valor a adicionar (R$)','gaAmount','number',true,'','min="0.01" step="0.01"')}${field('Data','gaDate','date',true,today())}<div class="field full"><label for="gaSource">De onde vem esse dinheiro?</label><select id="gaSource"><option value="manual">Dinheiro guardado fora do saldo do site</option><option value="balance">Transferir do saldo disponível</option></select></div>${textarea('Observações (opcional)','gaNotes','')}</div><div class="form-actions"><button type="button" class="btn light" id="cancelForm">Cancelar</button><button class="btn" type="submit">Adicionar à meta</button></div></form>`);$('cancelForm').onclick=closeModal;$('goalAddForm').onsubmit=e=>{e.preventDefault();const a=num($('gaAmount').value),source=$('gaSource').value,date=$('gaDate').value||today(),notes=$('gaNotes').value.trim();if(a<=0)return toast('Informe um valor válido.');if(g.saved+a>g.target+0.001)return toast('Esse valor ultrapassa o objetivo da meta.');if(source==='balance'&&a>balance())return toast('Saldo disponível insuficiente.');const previous=JSON.stringify(state);g.saved+=a;tx(source==='balance'?'vault_deposit':'goal_contribution',source==='balance'?`Transferência para meta — ${g.name}`:`Valor guardado para meta — ${g.name}`,a,'Metas',date,notes,source==='balance'?-a:0,g.id);if(!save()){state=JSON.parse(previous);renderAll();return}closeModal();renderAll();toast('Progresso da meta atualizado.')};}
+function fillSettings(){$('initialBalance').value=state.profile.initialBalance||0;$('hideByDefault').value=String(!!state.profile.hideByDefault)}
+function deleteRecord(type,id){if(!confirm('Tem certeza de que deseja excluir este registro?'))return;state[type]=state[type].filter(r=>r.id!==id);save();renderAll();toast('Registro excluído.')}
+function download(name,content,type){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function csvEscape(v){return '"'+String(v??'').replace(/"/g,'""')+'"'}
+document.querySelectorAll('.nav-item').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.go)));
+$('toggleBalance').onclick=()=>{state.hidden=!state.hidden;save();renderHome()};
+$('addMoneyBtn').onclick=()=>{const featuredGoal=ensureFixedHondaGoal();goalAdd(featuredGoal.id)};$('addExpenseBtn').onclick=()=>cashForm('expense');
+$('newDebt').onclick=()=>formRecord('debts');$('newLoan').onclick=()=>formRecord('loans');$('newSale').onclick=()=>formRecord('sales');$('newGoal').onclick=()=>goalForm();
+window.openRibeiroSettings=function(e){try{if(e){e.preventDefault();e.stopPropagation();}document.querySelectorAll('.view').forEach(v=>{v.classList.remove('active');v.style.display='none';});const panel=document.getElementById('view-settings');if(!panel){console.error('A área de configurações não foi encontrada.');return;}panel.classList.add('active');panel.style.display='block';document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));fillSettings();window.scrollTo({top:0,behavior:'auto'});}catch(err){console.error('Erro ao abrir configurações:',err);toast('Não foi possível abrir as configurações. Recarregue a página e tente novamente.');}};
+window.openRibeiroProfileEditor=function(e){if(e){e.preventDefault();e.stopPropagation();}const photo=readProfilePhoto()||state.profile.photo||'';const initials=esc((state.profile.name||'TR').split(/\s+/).slice(0,2).map(x=>x[0]||'').join('').toUpperCase());openModal('Editar perfil',`<div class="profile-editor"><button type="button" class="profile-photo-choice" id="profileModalChangePhoto"><span class="settings-photo-preview" id="profileModalPhoto">${photo?`<img src="${photo}" alt="Foto de perfil atual">`:initials}</span><span><strong>Alterar foto</strong><small>Escolha e ajuste uma foto para o seu perfil.</small></span><span class="profile-chevron">›</span></button><form id="profileEditorForm"><div class="field" style="margin-top:14px"><label for="profileEditorName">Seu nome</label><input id="profileEditorName" required maxlength="60" autocomplete="name" value="${esc(state.profile.name||'')}"></div><div class="form-actions"><button type="button" class="btn light" id="cancelProfileEdit">Cancelar</button><button type="submit" class="btn">Salvar perfil</button></div></form></div>`);$('cancelProfileEdit').onclick=closeModal;$('profileEditorForm').onsubmit=ev=>{ev.preventDefault();const old=state.profile.name;state.profile.name=$('profileEditorName').value.trim()||'Tony Ribeiro';if(save()){updateProfile();closeModal();}else{state.profile.name=old;updateProfile();}};};
+$('dataInfoButton').onclick=()=>openModal('Privacidade e segurança',`<div class="info-copy"><p><strong>Seus dados ficam neste navegador.</strong> O RIBEIRO usa o armazenamento local do dispositivo para manter seus registros e sua foto.</p><p>Se você limpar os dados do site, apagar os dados do navegador ou trocar de aparelho, pode perder essas informações.</p><p><strong>Recomendação:</strong> toque em <em>Salvar dados</em> regularmente e guarde o arquivo de backup em um local seguro. Para recuperar, use <em>Restaurar dados</em>.</p><p>O arquivo de backup contém informações financeiras pessoais e sua foto de perfil. Não compartilhe com pessoas em quem não confia.</p></div>`);
+$('termsButton').onclick=()=>openModal('Termos de uso',`<div class="info-copy"><p>O RIBEIRO é uma ferramenta pessoal de organização financeira. Os registros dependem das informações que você inserir e devem ser conferidos por você.</p><p>O aplicativo não é um banco, não movimenta dinheiro e não substitui orientação financeira, contábil ou jurídica.</p><p>Você é responsável por manter cópias de segurança e proteger os arquivos exportados, que podem conter dados financeiros pessoais.</p><p>Ao usar o aplicativo, você entende que os dados locais podem ser apagados se os dados do navegador forem removidos ou se o dispositivo for trocado.</p></div>`);
+$('closeModal').onclick=closeModal;$('modalBackdrop').addEventListener('click',e=>{if(e.target===$('modalBackdrop'))closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+['debtSearch','debtFilter'].forEach(id=>$(id).addEventListener('input',()=>renderRecords('debts')));['loanSearch','loanFilter'].forEach(id=>$(id).addEventListener('input',()=>renderRecords('loans')));['saleSearch','saleFilter'].forEach(id=>$(id).addEventListener('input',()=>renderRecords('sales')));['historySearch','historyFilter'].forEach(id=>$(id).addEventListener('input',renderHistory));
+document.body.addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(!b)return;const {action,type,id}=b.dataset;if(action==='edit'){const r=state[type].find(x=>x.id===id);if(r)formRecord(type,r)}if(action==='pay')paymentForm(type,id);if(action==='delete')deleteRecord(type,id);if(action==='goal-edit'){const g=state.goals.find(x=>x.id===id);if(g)goalForm(g)}if(action==='goal-delete'){const target=state.goals.find(x=>x.id===id);if(target&&String(target.name||'').trim().toLocaleLowerCase('pt-BR').replace(/\s+/g,'')==='hondacg160fan'){toast('A meta da HONDA CG160 Fan é fixa e não pode ser excluída.');return}if(confirm('Excluir esta meta?')){state.goals=state.goals.filter(x=>x.id!==id);save();renderAll();toast('Meta excluída.')}}if(action==='goal-add')goalAdd(id)});
+$('settingsForm').onsubmit=e=>{e.preventDefault();const oldInitial=state.profile.initialBalance,oldHide=state.profile.hideByDefault,oldHidden=state.hidden;state.profile.initialBalance=num($('initialBalance').value);state.profile.hideByDefault=$('hideByDefault').value==='true';state.hidden=state.profile.hideByDefault;if(save()){renderAll();fillSettings();toast('Configurações salvas.')}else{state.profile.initialBalance=oldInitial;state.profile.hideByDefault=oldHide;state.hidden=oldHidden;fillSettings();renderAll();}};
+ $('exportJson').onclick=()=>{let photo=state.profile.photo||'';try{photo=localStorage.getItem(PHOTO_KEY)||photo}catch(_){}const payload={...state,profile:{...state.profile,photo},exportedAt:new Date().toISOString(),app:'RIBEIRO',backupVersion:1};download('ribeiro-backup.json',JSON.stringify(payload,null,2),'application/json');};
+$('importJson').onchange=e=>{const file=e.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const incoming=JSON.parse(reader.result);if(!incoming.profile||!Array.isArray(incoming.transactions))throw new Error('Formato inválido');if(!confirm('Restaurar este backup substituirá os dados atuais. Deseja continuar?'))return;const next={...defaultState(),...incoming,profile:{...defaultState().profile,...incoming.profile}};const backupPhoto=typeof next.profile.photo==='string'?next.profile.photo:'';if(backupPhoto){localStorage.setItem(PHOTO_KEY,backupPhoto);if(localStorage.getItem(PHOTO_KEY)!==backupPhoto)throw new Error('A foto do backup não foi gravada.');}next.profile.photo=backupPhoto||localStorage.getItem(PHOTO_KEY)||'';const previous=state;state=next;if(!save()){state=previous;renderAll();fillSettings();throw new Error('Não foi possível salvar os dados restaurados.');}renderAll();fillSettings();toast('Backup restaurado.')}catch(err){console.error('Falha ao restaurar backup:',err);toast(err.message||'Não foi possível ler esse backup JSON.')}finally{e.target.value=''}};reader.readAsText(file)};
+
+
+state.hidden=!!state.profile.hideByDefault;updateProfile();renderAll();save();
+})();
+</script>
+<script>
+/* Foto de perfil: usa o seletor nativo do iPhone/iPad e mantém as configurações abertas. */
+(function(){
+  const $=id=>document.getElementById(id);
+  const backdrop=$('modalBackdrop'), body=$('modalBody'), title=$('modalTitle');
+  let image=null, zoom=1, posX=0, posY=0, drag=null, baseScale=1;
+  function showModal(t,html){title.textContent=t;body.innerHTML=html;backdrop.classList.add('open');document.body.style.overflow='hidden';}
+  function closeCrop(){backdrop.classList.remove('open');document.body.style.overflow='';}
+  function toastMsg(msg){const el=$('toast');if(el){el.textContent=msg;el.classList.add('show');clearTimeout(window.ribeiroPhotoToastTimer);window.ribeiroPhotoToastTimer=setTimeout(()=>el.classList.remove('show'),3000)}else alert(msg)}
+  function openNativePicker(){const input=$('profilePhotoNative');if(!input){toastMsg('O seletor de fotos não está disponível. Recarregue a página e tente novamente.');return;}input.value='';try{input.click();}catch(err){console.error('Não foi possível abrir o seletor de fotos:',err);toastMsg('Não foi possível abrir suas fotos. Tente novamente.');}}
+  function openCrop(file){
+    if(!file)return;
+    if(!file.type.startsWith('image/')){toastMsg('Escolha um arquivo de imagem.');return;}
+    if(file.size>15*1024*1024){toastMsg('Escolha uma foto de até 15 MB.');return;}
+    const reader=new FileReader();
+    reader.onerror=()=>toastMsg('Não foi possível ler a foto. Tente escolher outra.');
+    reader.onload=()=>{
+      image=new Image();image.onerror=()=>toastMsg('Não foi possível abrir essa imagem.');
+      image.onload=()=>{
+        zoom=1;posX=posY=0;drag=null;
+        showModal('Ajustar foto de perfil',`<p class="crop-help">Arraste a foto com o dedo para escolher o enquadramento. Use a barra para aproximar ou afastar. O círculo mostra como ficará no perfil.</p><div class="crop-stage" id="fixCropStage"><img id="fixCropImage" alt="Prévia da foto"></div><div class="crop-control"><label for="fixCropZoom"><span>Zoom da foto</span><span id="fixCropZoomLabel">1,00×</span></label><input id="fixCropZoom" type="range" min="1" max="5" step="0.01" value="1"></div><div class="crop-actions"><button type="button" class="btn light" id="fixCropCancel">Cancelar</button><button type="button" class="btn" id="fixCropSave">Salvar foto</button></div>`);
+        const stage=$('fixCropStage'),img=$('fixCropImage');img.src=reader.result;
+        function measure(){const box=Math.max(1,stage.clientWidth);baseScale=Math.max(box/image.naturalWidth,box/image.naturalHeight);const sc=baseScale*zoom;return {box,iw:image.naturalWidth*sc,ih:image.naturalHeight*sc}}
+        function layout(){const m=measure(),maxX=Math.max(0,(m.iw-m.box)/2),maxY=Math.max(0,(m.ih-m.box)/2);posX=Math.max(-maxX,Math.min(maxX,posX));posY=Math.max(-maxY,Math.min(maxY,posY));img.style.width=m.iw+'px';img.style.height=m.ih+'px';img.style.left=((m.box-m.iw)/2+posX)+'px';img.style.top=((m.box-m.ih)/2+posY)+'px';$('fixCropZoomLabel').textContent=zoom.toFixed(2).replace('.',',')+'×';}
+        requestAnimationFrame(()=>requestAnimationFrame(layout));
+        $('fixCropZoom').oninput=e=>{const old=zoom;zoom=Number(e.target.value);posX*=zoom/old;posY*=zoom/old;layout()};
+        stage.onpointerdown=e=>{if(e.pointerType==='mouse'&&e.button!==0)return;drag={x:e.clientX,y:e.clientY,px:posX,py:posY};try{stage.setPointerCapture(e.pointerId)}catch(_){}};
+        stage.onpointermove=e=>{if(!drag)return;posX=drag.px+e.clientX-drag.x;posY=drag.py+e.clientY-drag.y;layout()};
+        const stop=()=>drag=null;stage.onpointerup=stop;stage.onpointercancel=stop;stage.onlostpointercapture=stop;
+        $('fixCropCancel').onclick=closeCrop;
+        $('fixCropSave').onclick=()=>{
+          const saveButton=$('fixCropSave');saveButton.disabled=true;saveButton.textContent='Salvando…';
+          try{
+            const m=measure(),maxX=Math.max(0,(m.iw-m.box)/2),maxY=Math.max(0,(m.ih-m.box)/2);posX=Math.max(-maxX,Math.min(maxX,posX));posY=Math.max(-maxY,Math.min(maxY,posY));
+            const left=(m.box-m.iw)/2+posX,top=(m.box-m.ih)/2+posY,canvas=document.createElement('canvas');canvas.width=canvas.height=256;const ctx=canvas.getContext('2d');if(!ctx)throw Error('Não foi possível preparar a foto.');
+            ctx.beginPath();ctx.arc(128,128,128,0,Math.PI*2);ctx.clip();ctx.drawImage(image,left*(512/m.box),top*(512/m.box),m.iw*(512/m.box),m.ih*(512/m.box));
+            const photo=canvas.toDataURL('image/jpeg',0.72);
+            if(typeof window.ribeiroSaveProfilePhoto!=='function'||!window.ribeiroSaveProfilePhoto(photo))throw Error('O navegador não conseguiu guardar a foto. Tente outra imagem.');
+            closeCrop();
+          }catch(err){console.error('Falha ao salvar foto de perfil:',err);toastMsg(err.message||'Não foi possível salvar a foto.');saveButton.disabled=false;saveButton.textContent='Salvar foto';}
+        };
+      };
+      image.src=reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+  document.addEventListener('click',e=>{const target=e.target.closest('#changeProfilePhoto, #profileModalChangePhoto');if(target){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();openNativePicker()}},true);
+  const input=$('profilePhotoNative');if(input)input.addEventListener('change',e=>{const file=e.target.files&&e.target.files[0];if(file)openCrop(file);e.target.value=''});
+  const closeButton=$('closeModal');if(closeButton)closeButton.addEventListener('click',closeCrop);if(backdrop)backdrop.addEventListener('click',e=>{if(e.target===backdrop)closeCrop()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCrop()});
+})();
+</script>
+
+<script>
+/* Correção de emergência para os controles do cabeçalho: delegação global de cliques. */
+(function(){
+  'use strict';
+  const byId=id=>document.getElementById(id);
+  function showSettingsFallback(){
+    const panel=byId('view-settings');
+    if(!panel) return;
+    document.querySelectorAll('.view').forEach(v=>{v.classList.remove('active');v.style.display='none';});
+    panel.classList.add('active');panel.style.display='block';
+    document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
+    try { if(typeof window.openRibeiroSettings==='function') window.openRibeiroSettings(); } catch(err){ console.error(err); }
+    try { window.scrollTo(0,0); } catch(_){}
+  }
+  function openProfileFallback(){
+    try { if(typeof window.openRibeiroProfileEditor==='function'){window.openRibeiroProfileEditor();return;} } catch(err){console.error(err);}
+    const backdrop=byId('modalBackdrop'), title=byId('modalTitle'), body=byId('modalBody');
+    if(!backdrop||!title||!body){showSettingsFallback();return;}
+    let name='Tony Ribeiro';
+    try {const saved=JSON.parse(localStorage.getItem('ribeiro_financas_v1')||'{}');name=saved.profile?.name||name;}catch(_){}
+    title.textContent='Editar perfil';
+    body.innerHTML='<div class="profile-editor"><button type="button" class="profile-photo-choice" id="profileModalChangePhoto"><span class="settings-photo-preview">TR</span><span><strong>Alterar foto</strong><small>Escolha uma foto para o seu perfil.</small></span><span class="profile-chevron">›</span></button><form id="profileEditorEmergencyForm"><div class="field" style="margin-top:14px"><label for="profileEditorEmergencyName">Seu nome</label><input id="profileEditorEmergencyName" required maxlength="60" autocomplete="name"></div><div class="form-actions"><button type="button" class="btn light" id="profileEditorEmergencyCancel">Cancelar</button><button type="submit" class="btn">Salvar perfil</button></div></form></div>';
+    byId('profileEditorEmergencyName').value=name;
+    backdrop.classList.add('open');document.body.style.overflow='hidden';
+    byId('profileEditorEmergencyCancel').onclick=()=>{backdrop.classList.remove('open');document.body.style.overflow='';};
+    byId('profileEditorEmergencyForm').onsubmit=e=>{e.preventDefault();const next=byId('profileEditorEmergencyName').value.trim()||'Tony Ribeiro';try{const data=JSON.parse(localStorage.getItem('ribeiro_financas_v1')||'{}');data.profile=data.profile||{};data.profile.name=next;localStorage.setItem('ribeiro_financas_v1',JSON.stringify(data));const heading=byId('displayName');if(heading)heading.textContent=next;backdrop.classList.remove('open');document.body.style.overflow='';}catch(err){alert('Não foi possível salvar o nome neste navegador.');}};
+  }
+  document.addEventListener('click',function(e){
+    const settings=e.target.closest('#openSettings');
+    const avatar=e.target.closest('#avatarButton');
+    const profile=e.target.closest('#settingsProfileButton');
+    if(settings){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();showSettingsFallback();return;}
+    if(avatar||profile){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();openProfileFallback();}
+  },true);
+})();
+</script>
+
+
+</body>
+</html>
+
